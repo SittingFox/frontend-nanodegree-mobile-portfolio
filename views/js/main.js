@@ -143,7 +143,8 @@ pizzaIngredients.crusts = [
 ];
 
 // Setup arrays for moving pizzas and random pizzas, with randomPizzas needing to 
-// grab the pizzas that already exist within the page's HTML.
+// grab the pizzas that already exist within the page's HTML. It's more of an 
+// array-like object.
 var movingPizzas = [];
 var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
 
@@ -471,7 +472,7 @@ var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
   var newPizza = pizzaElementGenerator(i);
   pizzasDiv.appendChild(newPizza);
-  randomPizzas.push(newPizza);
+  randomPizzas[i] = newPizza;
 }
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
