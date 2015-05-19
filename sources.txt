@@ -1,0 +1,3 @@
+A thanks to Mozilla for the page on using onload for the inline script in
+index.html.
+https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload
