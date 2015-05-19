@@ -532,7 +532,13 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  
+  // I don't think we need 200 pizzas? I can see maybe 15-18 on a screen
+  // at a time. I know bigger screens than mine exist, so I will guess
+  // that 40 should be enough.
+  var numMovingPizzas = 40;
+  
+  for (var i = 0; i < numMovingPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
