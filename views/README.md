@@ -25,3 +25,5 @@ Fixing the Random Pizzas
 Using Dev Tools, I found that there was a forced synchronous layout being triggered by the slider for the random pizzas. Similar to the Browser Rendering Optimization course, I merged determineDx with changePizzaSizes.
 
 I then decided to make an array for the random pizzas as I did for the moving ones. When making it so randomPizzas would be filled as new pizzas are generated in the beginning, I found that the for loop was calling for the div that holds the pizzas each time. I set that up before the loop instead.
+
+Then I realized that the first two pizzas were not resizing. I noticed they were hard-coded into the page. So I changed the initial setup of randomPizzas from a new array to using document.getElementsByClassName("randomPizzaContainer").

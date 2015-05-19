@@ -142,9 +142,10 @@ pizzaIngredients.crusts = [
   "Stuffed Crust"
 ];
 
-// Setup arrays for moving pizzas and random pizzas
+// Setup arrays for moving pizzas and random pizzas, with randomPizzas needing to 
+// grab the pizzas that already exist within the page's HTML.
 var movingPizzas = [];
-var randomPizzas = [];
+var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
 
 // Name generator pulled from http://saturdaykid.com/usernames/generator.html
 // Capitalizes first letter of each word
