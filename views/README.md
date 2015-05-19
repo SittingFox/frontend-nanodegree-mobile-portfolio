@@ -22,4 +22,6 @@ I then moved getting all the array elements for the moving pizzas outside of upd
 Fixing the Random Pizzas
 ------------------------
 
+Using Dev Tools, I found that there was a forced synchronous layout being triggered by the slider for the random pizzas. Similar to the Browser Rendering Optimization course, I merged determineDx with changePizzaSizes.
 
+I then decided to make an array for the random pizzas as I did for the moving ones. When making it so randomPizzas would be filled as new pizzas are generated in the beginning, I found that the for loop was calling for the div that holds the pizzas each time. I set that up before the loop instead.
