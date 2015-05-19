@@ -142,6 +142,9 @@ pizzaIngredients.crusts = [
   "Stuffed Crust"
 ];
 
+// Setup array of moving pizzas
+var movingPizzas = [];
+
 // Name generator pulled from http://saturdaykid.com/usernames/generator.html
 // Capitalizes first letter of each word
 String.prototype.capitalize = function() {
@@ -509,10 +512,10 @@ function updatePositions() {
 	  phases[i] = Math.sin((scrollTop / 1250) + i);
   }
 
-  var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
+  var numMovingPizzas = movingPizzas.length;
+  for (var i = 0; i < numMovingPizzas; i++) {
     var phase = phases[i % 5];
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    movingPizzas[i].style.left = movingPizzas[i].basicLeft + 100 * phase + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -530,13 +533,13 @@ window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 8;
-  var s = 256;
-  
   // I don't think we need 200 pizzas? I can see maybe 15-18 on a screen
   // at a time. I know bigger screens than mine exist, so I will guess
-  // that 40 should be enough.
-  var numMovingPizzas = 40;
+  // that 6 columns and a total of 24 pizzas should be enough.
+  
+  var cols = 6;
+  var s = 256;
+  var numMovingPizzas = 24;
   
   for (var i = 0; i < numMovingPizzas; i++) {
     var elem = document.createElement('img');
@@ -547,6 +550,8 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
+    movingPizzas.push(elem); // Just add pizza while we're at it
   }
+  
   updatePositions();
 });
