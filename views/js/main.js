@@ -502,9 +502,16 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
+  // Seperate out phase calculations to avoid forced synchronous layout
+  var phases = [];
+  var scrollTop = document.body.scrollTop;
+  for (var i = 0; i < 5; i++) {
+	  phases[i] = Math.sin((scrollTop / 1250) + i);
+  }
+
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = phases[i % 5];
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
