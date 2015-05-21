@@ -27,3 +27,5 @@ Using Dev Tools, I found that there was a forced synchronous layout being trigge
 I then decided to make an array for the random pizzas as I did for the moving ones. When making it so randomPizzas would be filled as new pizzas are generated in the beginning, I found that the for loop was calling for the div that holds the pizzas each time. I set that up before the loop instead.
 
 Then I realized that the first two pizzas were not resizing. I noticed they were hard-coded into the page. So I changed the initial setup of randomPizzas from a new array to using document.getElementsByClassName("randomPizzaContainer").
+
+Thanks to some pointers by the Udacity code reviewer, I made some other improvements. Instead of guessing how many moving pizzas would be good for everyone, the number depends on the user's screen size. Also, I disabled backface visibility on them, which should help the moving pizzas reach 60 fps on more moderate hardware.

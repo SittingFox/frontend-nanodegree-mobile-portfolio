@@ -532,12 +532,18 @@ window.addEventListener('scroll', updatePositions);
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   // I don't think we need 200 pizzas? I can see maybe 15-18 on a screen
-  // at a time. I know bigger screens than mine exist, so I will guess
-  // that 6 columns and a total of 24 pizzas should be enough.
+  // at a time. I will have it calculate how many pizzas are needed based
+  // on the biggest the window can get. No worrying about resizing.
   
-  var cols = 6;
-  var s = 256;
-  var numMovingPizzas = 24;
+  var screenWidth = screen.width;
+  var screenHeight = screen.height;
+  
+  var spacing = 256; // better name
+  // Round up for column count and down for row count, because though the last
+  // pizza column may sit offscreen, it can move to the left and onto the screen
+  var cols = Math.ceil(screenWidth / spacing);
+  var rows = Math.floor(screenHeight / spacing);
+  var numMovingPizzas = cols * rows;
   
   for (var i = 0; i < numMovingPizzas; i++) {
     var elem = document.createElement('img');
@@ -545,8 +551,8 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
-    elem.style.top = (Math.floor(i / cols) * s) + 'px';
+    elem.basicLeft = (i % cols) * spacing;
+    elem.style.top = (Math.floor(i / cols) * spacing) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
     movingPizzas.push(elem); // Just add pizza while we're at it
   }
