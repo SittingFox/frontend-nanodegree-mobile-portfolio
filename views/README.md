@@ -28,4 +28,6 @@ I then decided to make an array for the random pizzas as I did for the moving on
 
 Then I realized that the first two pizzas were not resizing. I noticed they were hard-coded into the page. So I changed the initial setup of randomPizzas from a new array to using document.getElementsByClassName("randomPizzaContainer").
 
-Thanks to some pointers by the Udacity code reviewer, I made some other improvements. Instead of guessing how many moving pizzas would be good for everyone, the number depends on the user's screen size. Also, I disabled backface visibility on them, which should help the moving pizzas reach 60 fps on more moderate hardware.
+Thanks to some pointers by the first Udacity code reviewer, I made some other improvements. Instead of guessing how many moving pizzas would be good for everyone, the number depends on the user's screen size. Also, I disabled backface visibility on them, which should help the moving pizzas reach 60 fps on more moderate hardware.
+
+A second coach pointed out issues in my fetching of screensize, and so I did that. I also decided to take on the challenge of using translateX, which was kind of tricky. There were a couple other minor things I tried that were suggested.

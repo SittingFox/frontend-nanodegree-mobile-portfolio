@@ -513,7 +513,10 @@ function updatePositions() {
   var numMovingPizzas = movingPizzas.length;
   for (var i = 0; i < numMovingPizzas; i++) {
     var phase = phases[i % 5];
-    movingPizzas[i].style.left = movingPizzas[i].basicLeft + 100 * phase + 'px';
+    // Decided to give translateX a try. The 8 helps it adjust to right
+    // where the pizzas had been the other way.
+    var position = movingPizzas[i].basicLeft + 100 * phase - 8;
+    movingPizzas[i].style.transform = 'translateX( ' + position + 'px )';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -533,27 +536,28 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   // I don't think we need 200 pizzas? I can see maybe 15-18 on a screen
   // at a time. I will have it calculate how many pizzas are needed based
-  // on the biggest the window can get. No worrying about resizing.
-  
-  var screenWidth = screen.width;
-  var screenHeight = screen.height;
+  // on the available screen size.
   
   var spacing = 256; // better name
-  // Round up for column count and down for row count, because though the last
+  // Round up for both cols and rows, but add 1 to column count because though the last
   // pizza column may sit offscreen, it can move to the left and onto the screen
-  var cols = Math.ceil(screenWidth / spacing);
-  var rows = Math.floor(screenHeight / spacing);
+  var cols = Math.ceil(innerWidth / spacing) + 1;
+  var rows = Math.ceil(innerHeight / spacing);
   var numMovingPizzas = cols * rows;
   
+  // Moved outside, and getElementById is faster
+  var movingPizzaContainer = document.getElementById("movingPizzas1");
+  
+  var elem; // suggested move by coach
   for (var i = 0; i < numMovingPizzas; i++) {
-    var elem = document.createElement('img');
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * spacing;
     elem.style.top = (Math.floor(i / cols) * spacing) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    movingPizzaContainer.appendChild(elem);
     movingPizzas.push(elem); // Just add pizza while we're at it
   }
   
